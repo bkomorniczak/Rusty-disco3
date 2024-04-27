@@ -50,7 +50,9 @@ pub fn read_plaintext() -> io::Result<String> {
 }
 
 pub fn encrypt_text(text: &str, map: &HashMap<char, char>) -> String {
-    text.chars()
+    text.to_uppercase()
+        .chars()
+        .filter(|c| c.is_alphabetic())
         .map(|c| *map.get(&c).unwrap_or(&c))
         .collect()
 }
